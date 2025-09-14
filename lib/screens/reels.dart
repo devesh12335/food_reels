@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_reels/models/food_spot_model.dart';
+import 'package:food_reels/provider/food_provider.dart';
+import 'package:food_reels/widgets/video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
-import 'package:food_reels_app/providers/food_provider.dart';
-import 'package:food_reels_app/models/food_spot.dart';
-import 'package:food_reels_app/widgets/video_player_widget.dart';
 
 class ReelsScreen extends StatefulWidget {
   const ReelsScreen({super.key});
@@ -134,7 +134,7 @@ class _ReelsScreenState extends State<ReelsScreen> with TickerProviderStateMixin
                               );
                             },
                             icon: Icon(
-                              foodProvider!.isLiked(spot.id)
+                              foodProvider.isLiked(spot.id)
                                   ? Icons.favorite_rounded
                                   : Icons.favorite_border_rounded,
                               color: foodProvider.isLiked(spot.id) ? Colors.redAccent : null,
