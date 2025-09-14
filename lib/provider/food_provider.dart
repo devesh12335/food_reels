@@ -50,7 +50,7 @@ class FoodProvider with ChangeNotifier {
     }
 
     // Filter by 10 km radius and sort by distance
-    return nearbyList.where((spot) => spot.distanceInKm <= 1000000).toList()
+    return nearbyList.where((spot) => spot.distanceInKm <= 10).toList()
       ..sort((a, b) => a.distanceInKm.compareTo(b.distanceInKm));
   }
 }
