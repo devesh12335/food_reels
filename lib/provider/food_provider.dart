@@ -35,7 +35,6 @@ class FoodProvider with ChangeNotifier {
       return [];
     }
 
-    // We make a copy to avoid modifying the original list.
     List<FoodSpot> nearbyList = List.of(_spots);
 
     // Calculate distance for each spot and filter.
