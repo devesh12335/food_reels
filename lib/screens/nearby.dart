@@ -24,7 +24,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
       builder: (context, locationProvider, foodProvider, child) {
         final Position? userLocation = locationProvider.currentPosition;
         final List<FoodSpot> nearbySpots = foodProvider.getNearbySpots(userLocation);
-
+          
         return Scaffold(
           appBar: AppBar(
             title: const Text('Nearby Spots'),
@@ -158,7 +158,31 @@ class NearbyMap extends StatelessWidget {
         point: LatLng(spot.latitude, spot.longitude),
         width: 80,
         height: 80,
-        child: const Icon(Icons.location_on, size: 40, color: Colors.red),
+        child:Image.network(
+            spot.thumbnailUrl,
+            // Optional: Add a placeholder while the image is loading
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+            // Optional: Add an error widget if the image fails to load
+            errorBuilder: (context, error, stackTrace) {
+              debugPrint("Image token Exception $error");
+              return const Icon(
+                Icons.error,
+                color: Colors.red,
+                size: 60,
+              );
+            },
+          ),
       );
     }).toList();
 
