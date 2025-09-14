@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_reels/provider/food_provider.dart';
 import 'package:food_reels/provider/location_provider.dart';
+import 'package:food_reels/screens/nearby.dart';
 import 'package:food_reels/screens/reels.dart';
 import 'package:provider/provider.dart';
 
