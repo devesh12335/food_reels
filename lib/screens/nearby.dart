@@ -202,7 +202,7 @@ class NearbyMap extends StatelessWidget {
       ),
       children: [
         TileLayer(
-          urlTemplate: 'https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=Uqp4et707r4LXLrpt3cU',
+          urlTemplate: 'https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=MAP-API-KEY-HERE',
           userAgentPackageName: 'com.example.app',
         ),
         MarkerLayer(
