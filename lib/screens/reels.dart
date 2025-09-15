@@ -137,7 +137,7 @@ class _ReelsScreenState extends State<ReelsScreen> with TickerProviderStateMixin
                               foodProvider.isLiked(spot.id)
                                   ? Icons.favorite_rounded
                                   : Icons.favorite_border_rounded,
-                              color: foodProvider.isLiked(spot.id) ? Colors.redAccent : null,
+                              color: foodProvider.isLiked(spot.id) ? Colors.redAccent : Colors.grey,
                             ),
                             style: IconButton.styleFrom(
                               backgroundColor: Colors.white,
@@ -146,6 +146,7 @@ class _ReelsScreenState extends State<ReelsScreen> with TickerProviderStateMixin
                           )
                         ],
                       ),
+                      const SizedBox(height: 30),
                     ],
                   ),
                 ),

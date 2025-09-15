@@ -42,10 +42,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _screens = <Widget>[
-    ReelsScreen(),
-    NearbyScreen(),
-  ];
+  static const List<Widget> _screens = <Widget>[ReelsScreen(), NearbyScreen()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -59,7 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // This is a simple way to manage state for a small app.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!Provider.of<LocationProvider>(context, listen: false).hasLocation) {
-        Provider.of<LocationProvider>(context, listen: false).getCurrentLocation();
+        Provider.of<LocationProvider>(
+          context,
+          listen: false,
+        ).getCurrentLocation();
       }
       if (Provider.of<FoodProvider>(context, listen: false).spots.isEmpty) {
         Provider.of<FoodProvider>(context, listen: false).fetchFoodSpots();
@@ -67,21 +67,49 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.videocam_rounded),
-            label: 'Reels',
+      extendBody: true,
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 35.0),
+        child: _screens[_selectedIndex],
+      ),
+      bottomNavigationBar: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on_rounded),
-            label: 'Nearby',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepOrange,
-        onTap: _onItemTapped,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha(
+                20,
+              ), 
+              blurRadius: 10.0, 
+              spreadRadius: 0.0, 
+              offset: Offset(
+                0.0,
+                -10.0,
+              ), 
+            ),
+          ],
+        ),
+
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.videocam_rounded),
+              label: 'Reels',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.location_on_rounded),
+              label: 'Nearby',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.deepOrange,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
